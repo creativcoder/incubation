@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Introducing Lollipop, a sweet new take on Android.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Android</title>
+    <title>Incubation</title>
 
     <!-- Page styles -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
@@ -75,10 +75,10 @@
             <i class="material-icons">more_vert</i>
           </button>
           <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-            <li class="mdl-menu__item"><a class="cd-signin" onclick="authenticate()">Login with Facebook</a></li>
-            <li class="mdl-menu__item">Sign up</li>
-            <li disabled class="mdl-menu__item">4.3 Jelly Bean</li>
-            <li class="mdl-menu__item">Android History</li>
+            <li class="mdl-menu__item"><a class="cd-signin" onclick="signup()">Signup with Facebook</a></li>
+            <li class="mdl-menu__item"><a href="#0" onclick="login()">Login</a></li>
+            <li disabled class="mdl-menu__item">Profile</li>
+            <li class="mdl-menu__item">Events</li>
           </ul>
           <span class="android-mobile-title mdl-layout-title">
             <img class="android-logo-image" src="images/android-logo.png">
@@ -333,6 +333,19 @@
 
     <script>
     
+        /////////////////////////////////////////////////////////////
+        //model for the user//
+        /*var person = {
+            uid:data.roll_no,
+            details:{
+                email:data.email,
+                password:data.password,
+                stream:data.stream,
+                year:data.year
+            }
+        }*/
+
+
         /*$('.hide-password').on('click', function(){
   var $this= $(this),
     $password_field = $this.prev('input');
@@ -351,10 +364,15 @@ $(document).ready(function(){
     });
 });
 
-function authenticate(){
+function signup(){
         vex.dialog.open({
+
+//defaultOptions:[showCloseButton: true],
+
+    overlayClosesOnClick: false,
+
   message: 'Enter your Email and Password:',
-  input: "<label>Email:</label><input name=\"email\" type=\"text\" placeholder=\"Email\" required />\n<label>Password:</label><input name=\"password\" type=\"password\" placeholder=\"Password\" required />\n<label>Join Year:</label><input type=\"number\" max=\"2015\" min=\"2008\" required/><label>Stream</label>\n<input name=\"dept\" type=\"radio\" value=\"CSE\" checked>CSE\n<input name=\"dept\" type=\"radio\" value=\"ME\">ME\n<input name=\"dept\" type=\"radio\" value=\"ECE1\">ECE1\n<input name=\"dept\" type=\"radio\" value=\"ECE2\">ECE2\n<input name=\"dept\" type=\"radio\" value=\"CE\" >CE\n<input name=\"dept\" type=\"radio\" value=\"AEIE\" >AEIE\n<label>WBUT Roll No:</label><input type=\"number\" max=\"9999999999\" />",
+  input: "<label>Email:</label><input name=\"email\" type=\"text\" placeholder=\"Email\" required />\n<label>Password:</label><input name=\"password\" type=\"password\" placeholder=\"Password\" required />\n<label>Join Year:</label><input type=\"number\" max=\"2015\" min=\"2008\" required/><label>Stream</label>\n<input name=\"dept\" type=\"radio\" value=\"CSE\" checked>CSE\n<input name=\"dept\" type=\"radio\" value=\"ME\">ME\n<input name=\"dept\" type=\"radio\" value=\"ECE1\">ECE1\n<input name=\"dept\" type=\"radio\" value=\"ECE2\">ECE2\n<input name=\"dept\" type=\"radio\" value=\"CE\" >CE\n<input name=\"dept\" type=\"radio\" value=\"AEIE\" >AEIE\n<label>WBUT Roll No:</label><input name=\"roll_no\" type=\"number\" max=\"9999999999\" />",
   
   buttons: [
     $.extend({}, vex.dialog.buttons.YES, {
@@ -374,7 +392,7 @@ ref = new Firebase("https://sizzling-torch-3500.firebaseio.com");
   if (error) {
     console.log("Login Failed!", error);
   } else {
-
+    ref.set({email:data.email,password:data.password});
     alert(authData.facebook.displayName);
   }
 });
@@ -393,7 +411,57 @@ ref.authWithOAuthPopup("facebook", function(error, authData) {
   }
 });*/
 
-} //authenticate method
+} //signup method
+
+function login(){
+        vex.dialog.open({
+
+//defaultOptions:[showCloseButton: true],
+
+    overlayClosesOnClick: false,
+
+  message: 'Enter your Email and Password:',
+  input: "<label>Email:</label><input name=\"email\" type=\"text\" placeholder=\"Email\" required />\n<label>Password:</label><input name=\"password\" type=\"password\" placeholder=\"Password\" required />",
+  
+  buttons: [
+    $.extend({},vex.dialog.buttons.YES,{text:'Sign In with Facebook'}),
+    $.extend({}, vex.dialog.buttons.YES, {
+      text: 'Login'
+    }), $.extend({}, vex.dialog.buttons.NO, {
+      text: 'Cancel'
+    }),
+  ],
+
+  callback: function(data) {
+    if (data === false) {
+      return console.log('Cancelled');
+    }else {
+ref = new Firebase("https://sizzling-torch-3500.firebaseio.com");
+//alert(ref);
+    ref.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    ref.set({email:data.email,password:data.password});
+    alert(authData.facebook.displayName);
+  }
+});
+    //return console.log('Username', data.email, 'Password', data.password);
+}
+  }
+
+});
+    //$('cd-user-modal').toggleClass('.is-visible');
+/*ref = new Firebase("https://sizzling-torch-3500.firebaseio.com");
+ref.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log(authData);
+  }
+});*/
+
+} //signup method
 
     </script>
   </body>
