@@ -180,7 +180,7 @@ a img{
 .android-font {
   font-family: 'And Black', 'Helvetica', 'Arial', sans-serif;
   line-height: 1;
-  color: #A23838;
+  color: #000000;
   font-weight: 300;
 }
 
@@ -201,7 +201,7 @@ a img{
 
   .android-create-character a {
     text-decoration: none;
-    color: #767777;
+    color: #ffffff;
     font-weight: 300;
   }
 
