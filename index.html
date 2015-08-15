@@ -10,8 +10,22 @@
 
     <!-- Page styles -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"> <!-- Gem style -->
+    <script src="js/modernizr.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.css">
+
+
+<script src="script/material.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="script/vex.combined.min.js"></script>
+<script>vex.defaultOptions.className = 'vex-theme-os';</script>
+<link rel="stylesheet" href="css/vex.css" />
+<link rel="stylesheet" href="css/vex-theme-os.css" />
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/custom.css">
     <style>
@@ -61,7 +75,7 @@
             <i class="material-icons">more_vert</i>
           </button>
           <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-            <li class="mdl-menu__item "><a class="cd-signin" onclick="authenticate()">Login with Facebook</a></li>
+            <li class="mdl-menu__item"><a class="cd-signin" onclick="authenticate()">Login with Facebook</a></li>
             <li class="mdl-menu__item">Sign up</li>
             <li disabled class="mdl-menu__item">4.3 Jelly Bean</li>
             <li class="mdl-menu__item">Android History</li>
@@ -74,46 +88,6 @@
 
 <!--Sign in / Sign up Modal window-->
 
-<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
-  <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
-    
-    <ul class="cd-switcher">
-      <li><a href="#0">Sign in</a></li>
-      <li><a href="#0">New account</a></li>
-    </ul>
-    
-  </div>
-</div>
-
-<!--Submit forms-->
-
-<div class="cd-user-modal">
-  <div class="cd-user-modal-container">
-    
-    <!-- switcher tab here -->
- 
-    <div id="cd-login"> 
- 
-      <!-- form here -->
-      
-      <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
-    </div> 
- 
-    <div id="cd-signup">
- 
-      <!-- form here -->
-      
-    </div>
- 
-    <div id="cd-reset-password">
- 
-      <!-- form here -->
- 
-      <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
-    </div>
-  </div> 
-  <a href="#0" class="cd-close-form">Close</a>
-</div>
 
 
 <!-- Side drawer navigation menu-->
@@ -177,7 +151,7 @@
             </div>
             <div class="android-phone android-screen">
               <a class="android-image-link" href="">
-                <img class="android-screen-image" src="images/nexus6-on.jpg">
+                <img class="android-screen-image" src="images/nexus6-on.png">
               </a>
               <a class="android-link mdl-typography--font-regular mdl-typography--text-uppercase" href="">Quiz</a>
             </div>
@@ -189,7 +163,7 @@
             </div>
             <div class="android-tv android-screen">
               <a class="android-image-link" href="">
-                <img class="android-screen-image" src="images/tv-on.jpg">
+                <img class="android-screen-image" src="images/tv-on.png">
               </a>
               <a class="android-link mdl-typography--font-regular mdl-typography--text-uppercase" href="">Dev Conferences</a>
             </div>
@@ -204,13 +178,13 @@
         <div class="android-wear-section">
           <div class="android-wear-band">
             <div class="android-wear-band-text">
-              <div class="mdl-typography--display-2 mdl-typography--font-thin">You get prices and the fame</div>
+              <div class="mdl-typography--display-2 mdl-typography--font-thin">We also have cultural fests</div>
               <p class="mdl-typography--headline mdl-typography--font-thin">
                 Incubation is the most awaited event for the budding engineers and innovators.
               </p>
               <p>
                 <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
-                  See what's new in the Play Store&nbsp;<i class="material-icons">chevron_right</i>
+                  Explore the Events&nbsp;<i class="material-icons">chevron_right</i>
                 </a>
               </p>
             </div>
@@ -218,31 +192,31 @@
         </div>
         <div class="android-customized-section">
           <div class="android-customized-section-text">
-            <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">Customised by you, for you</div>
+            <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">Let your imagination run wild</div>
             <p class="mdl-typography--font-light">
-              Put the stuff that you care about right on your home screen: the latest news, the weather or a stream of your recent photos.
+              Join Incubation by SKFGI and be a part of the innovators of the future.
               <br>
-              <a href="" class="android-link mdl-typography--font-light">Customise your phone</a>
+              <a href="" class="android-link mdl-typography--font-light">Explore More</a>
             </p>
           </div>
           <div class="android-customized-section-image"></div>
         </div>
         <div class="android-more-section">
-          <div class="android-section-title mdl-typography--display-1-color-contrast">More from Android</div>
+          <div class="android-section-title mdl-typography--display-1-color-contrast">Some Highlights</div>
           <div class="android-card-container mdl-grid">
             <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
               <div class="mdl-card__media">
                 <img src="images/more-from-1.png">
               </div>
               <div class="mdl-card__title">
-                 <h4 class="mdl-card__title-text">Get going on Android</h4>
+                 <h4 class="mdl-card__title-text">Get your gray matter</h4>
               </div>
               <div class="mdl-card__supporting-text">
-                <span class="mdl-typography--font-light mdl-typography--subhead">Four tips to make your switch to Android quick and easy</span>
+                <span class="mdl-typography--font-light mdl-typography--subhead">We organize fun Quiz</span>
               </div>
               <div class="mdl-card__actions">
                  <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-                   Make the switch
+                   Register for Quiz 2015
                    <i class="material-icons">chevron_right</i>
                  </a>
               </div>
@@ -253,14 +227,14 @@
                 <img src="images/more-from-4.png">
               </div>
               <div class="mdl-card__title">
-                 <h4 class="mdl-card__title-text">Create your own Android character</h4>
+                 <h4 class="mdl-card__title-text">Maker Bot</h4>
               </div>
               <div class="mdl-card__supporting-text">
-                <span class="mdl-typography--font-light mdl-typography--subhead">Turn the little green Android mascot into you, your friends, anyone!</span>
+                <span class="mdl-typography--font-light mdl-typography--subhead">Make a bot and show us what you got</span>
               </div>
               <div class="mdl-card__actions">
                  <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-                   androidify.com
+                   Register for Maker Bot 2015
                    <i class="material-icons">chevron_right</i>
                  </a>
               </div>
@@ -271,14 +245,14 @@
                 <img src="images/more-from-2.png">
               </div>
               <div class="mdl-card__title">
-                 <h4 class="mdl-card__title-text">Get a clean customisable home screen</h4>
+                 <h4 class="mdl-card__title-text">DEVCon</h4>
               </div>
               <div class="mdl-card__supporting-text">
-                <span class="mdl-typography--font-light mdl-typography--subhead">A clean, simple, customisable home screen that comes with the power of Google Now: Traffic alerts, weather and much more, just a swipe away.</span>
+                <span class="mdl-typography--font-light mdl-typography--subhead">Every year we organize dev conferences to help students stay updated of the current trends in the Tech World</span>
               </div>
               <div class="mdl-card__actions">
                  <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-                   Download now
+                   Get Tickets for DEVCon 2015
                    <i class="material-icons">chevron_right</i>
                  </a>
               </div>
@@ -289,10 +263,10 @@
                 <img src="images/more-from-3.png">
               </div>
               <div class="mdl-card__title">
-                 <h4 class="mdl-card__title-text">Millions to choose from</h4>
+                 <h4 class="mdl-card__title-text">Cash prizes to be won</h4>
               </div>
               <div class="mdl-card__supporting-text">
-                <span class="mdl-typography--font-light mdl-typography--subhead">Hail a taxi, find a recipe, run through a temple – Google Play has all the apps and games that let you make your Android device uniquely yours.</span>
+                <span class="mdl-typography--font-light mdl-typography--subhead">You can win a lot prizes in the contests</span>
               </div>
               <div class="mdl-card__actions">
                  <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
@@ -355,9 +329,7 @@
       </div>
     </div>
     <!-- <a href="https://github.com/google/material-design-lite/blob/master/templates/android-dot-com/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">View Source</a> -->
-    <script src="script/material.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
 
     <script>
     
@@ -373,15 +345,42 @@
 
 
 var ref;
+$(document).ready(function(){
+    $('cd-signin').click(function(){
+        
+    });
+});
+
 function authenticate(){
-ref = new Firebase("https://sizzling-torch-3500.firebaseio.com");
+        vex.dialog.open({
+  message: 'Enter your Email and Password:',
+  input: "<label>Email:</label><input name=\"email\" type=\"text\" placeholder=\"Email\" required />\n<label>Password:</label><input name=\"password\" type=\"password\" placeholder=\"Password\" required />\n<label>Join Year:</label><input type=\"number\" max=\"2015\" min=\"2008\" required/><label>Stream</label>\n<input name=\"dept\" type=\"radio\" value=\"CSE\" checked>CSE\n<input name=\"dept\" type=\"radio\" value=\"ME\">ME\n<input name=\"dept\" type=\"radio\" value=\"ECE1\">ECE1\n<input name=\"dept\" type=\"radio\" value=\"ECE2\">ECE2\n<input name=\"dept\" type=\"radio\" value=\"CE\" >CE\n<input name=\"dept\" type=\"radio\" value=\"AEIE\" >AEIE\n<label>WBUT Roll No:</label><input type=\"number\" max=\"9999999999\" />",
+  
+  buttons: [
+    $.extend({}, vex.dialog.buttons.YES, {
+      text: 'Login with Facebook'
+    }), $.extend({}, vex.dialog.buttons.NO, {
+      text: 'Sign Up'
+    }),
+  ],
+
+  callback: function(data) {
+    if (data === false) {
+      return console.log('Cancelled');
+    }
+    return console.log('Username', data.email, 'Password', data.password);
+  }
+
+});
+    //$('cd-user-modal').toggleClass('.is-visible');
+/*ref = new Firebase("https://sizzling-torch-3500.firebaseio.com");
 ref.authWithOAuthPopup("facebook", function(error, authData) {
   if (error) {
     console.log("Login Failed!", error);
   } else {
     console.log(authData);
   }
-});
+});*/
 }
 
     </script>
