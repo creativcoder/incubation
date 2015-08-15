@@ -1,6 +1,7 @@
-# INCUBATION
+Incubation Club Website for Supreme Knowledge Foundation Group of Institutions
 
 Dependencies:
 Firebase
-Typed.js
+VexJS
 Jquery
+
