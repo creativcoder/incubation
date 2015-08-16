@@ -463,10 +463,11 @@ ref.authWithPassword({
     jQuery('.admin-loggin').text('Sign Out');
     jQuery('.admin-loggin').click(function(a,b){prompt("Are you sure you want to signout ? ");});
     jQuery('.logged-profile').attr('href','dashboard/dashboard.html');
-    jQuery('.logged-profile').click(function () { 
+    window.location.assign("dashboard.html")
+    /*jQuery('.logged-profile').click(function () { 
 
     jQuery('#whole-page').load('dashboard.html',authData); 
-});
+});*/
 
   }
 });
