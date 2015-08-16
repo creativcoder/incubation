@@ -465,7 +465,7 @@ ref.authWithPassword({
     jQuery('.logged-profile').attr('href','dashboard/dashboard.html');
     jQuery('.logged-profile').click(function () { 
 
-    jQuery('#whole-page').load('dashboard.html'); 
+    jQuery('#whole-page').load('dashboard.html',authData); 
 });
 
   }
