@@ -133,7 +133,7 @@
         </nav>
       </div>
 
-      <div class="android-content mdl-layout__content">
+      <div class="android-content mdl-layout__content" id="whole-page">
         <a name="top"></a>
         <div class="android-be-together-section mdl-typography--text-center">
 
@@ -462,6 +462,12 @@ ref.authWithPassword({
     //jQuery('.admin-loggin').addClass('disable_a_href');
     jQuery('.admin-loggin').text('Sign Out');
     jQuery('.admin-loggin').click(function(a,b){prompt("Are you sure you want to signout ? ");});
+    jQuery('.logged-profile').attr('href','dashboard/dashboard.html');
+    jQuery('.logged-profile').click(function () { 
+
+    jQuery('#whole-page').load('dashboard.html'); 
+});
+
   }
 });
 //console.log(ref);
