@@ -23,6 +23,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <script src="script/vex.combined.min.js"></script>
+    
 <script>vex.defaultOptions.className = 'vex-theme-os';</script>
 <link rel="stylesheet" href="css/vex.css" />
 <link rel="stylesheet" href="css/vex-theme-os.css" />
@@ -39,7 +40,14 @@
       margin-bottom: 40px;
       z-index: 900;
     }
+
+}
+        /* disable login clicks */
+.disable_a_href{
+    pointer-events: none;
+}
     </style>
+
   </head>
   <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -76,9 +84,10 @@
             <i class="material-icons">more_vert</i>
           </button>
           <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-            <li class="mdl-menu__item"><a class="cd-signin" onclick="signup()">Signup with Facebook</a></li>
+            <li class="mdl-menu__item admin-loggin"><a class="cd-signin" onclick="admin_signin()">Admin Login</a></li>
+            <li class="mdl-menu__item"><a class="cd-signin" onclick="signup()">Signup with Faceboo</a></li>
             <li class="mdl-menu__item"><a href="#0" onclick="login()">Login</a></li>
-            <li disabled class="mdl-menu__item">Profile</li>
+            <li disabled class="mdl-menu__item logged-profile">Profile</li>
             <li class="mdl-menu__item">Events</li>
           </ul>
           <span class="android-mobile-title mdl-layout-title">
@@ -95,21 +104,21 @@
 
       <div class="android-drawer mdl-layout__drawer">
         <span class="mdl-layout-title">
-          <img class="android-logo-image" src="images/android-logo-white.png">
+          <i class="fa fa-connectdevelop fa-2x"></i>
         </span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Phones</a>
-          <a class="mdl-navigation__link" href="">Tablets</a>
-          <a class="mdl-navigation__link" href="">Wear</a>
-          <a class="mdl-navigation__link" href="">TV</a>
-          <a class="mdl-navigation__link" href="">Auto</a>
-          <a class="mdl-navigation__link" href="">One</a>
-          <a class="mdl-navigation__link" href="">Play</a>
+          <a class="mdl-navigation__link" href="">Robotics</a>
+          <a class="mdl-navigation__link" href="">App Development</a>
+          <a class="mdl-navigation__link" href="">Technical Debates</a>
+          <a class="mdl-navigation__link" href="">Web Development</a>
+          <a class="mdl-navigation__link" href="">CodingArena</a>
+          <a class="mdl-navigation__link" href="">Best From Waste</a>
+          <a class="mdl-navigation__link" href="">Bridge Buiding</a>
           <div class="android-drawer-separator"></div>
-          <span class="mdl-navigation__link" href="">Versions</span>
-          <a class="mdl-navigation__link" href="">Lollipop 5.0</a>
-          <a class="mdl-navigation__link" href="">KitKat 4.4</a>
-          <a class="mdl-navigation__link" href="">Jelly Bean 4.3</a>
+          <span class="mdl-navigation__link" href="">Workshops</span>
+          <a class="mdl-navigation__link" href="">Deveoper Conferences</a>
+          <a class="mdl-navigation__link" href="">Construction</a>
+          <a class="mdl-navigation__link" href="">Circuits and Devices</a>
           <a class="mdl-navigation__link" href="">Android history</a>
           <div class="android-drawer-separator"></div>
           <span class="mdl-navigation__link" href="">Resources</span>
@@ -361,11 +370,7 @@
 
 
 var ref;
-$(document).ready(function(){
-    $('cd-signin').click(function(){
-        
-    });
-});
+var data_ref;
 
 function signup(){
         vex.dialog.open({
@@ -375,13 +380,13 @@ function signup(){
     overlayClosesOnClick: false,
 
   message: 'Enter your Email and Password:',
-  input: "<label>Email:</label><input name=\"email\" type=\"text\" placeholder=\"Email\" required />\n<label>Password:</label><input name=\"password\" type=\"password\" placeholder=\"Password\" required />\n<label>Join Year:</label><input type=\"number\" max=\"2015\" min=\"2008\" required/><label>Stream</label>\n<input name=\"dept\" type=\"radio\" value=\"CSE\" checked>CSE\n<input name=\"dept\" type=\"radio\" value=\"ME\">ME\n<input name=\"dept\" type=\"radio\" value=\"ECE1\">ECE1\n<input name=\"dept\" type=\"radio\" value=\"ECE2\">ECE2\n<input name=\"dept\" type=\"radio\" value=\"CE\" >CE\n<input name=\"dept\" type=\"radio\" value=\"AEIE\" >AEIE\n<label>WBUT Roll No:</label><input name=\"roll_no\" type=\"number\" max=\"9999999999\" />",
+  input: "<label>Email:</label><input name=\"email\" type=\"text\" placeholder=\"Email\" required />\n<label>Password:</label><input name=\"password\" type=\"password\" placeholder=\"Password\" required />\n<label>Join Year:</label><input name=\"join\" type=\"number\" max=\"2015\" min=\"2008\" required/><label>Stream</label>\n<input name=\"dept\" type=\"radio\" value=\"CSE\" checked>CSE\n<input name=\"dept\" type=\"radio\" value=\"ME\">ME\n<input name=\"dept\" type=\"radio\" value=\"ECE1\">ECE1\n<input name=\"dept\" type=\"radio\" value=\"ECE2\">ECE2\n<input name=\"dept\" type=\"radio\" value=\"CE\" >CE\n<input name=\"dept\" type=\"radio\" value=\"AEIE\" >AEIE\n<label>WBUT Roll No:</label><input name=\"roll_no\" type=\"number\" max=\"9999999999\" />",
   
   buttons: [
     $.extend({}, vex.dialog.buttons.YES, {
       text: 'Login with Facebook'
     }), $.extend({}, vex.dialog.buttons.NO, {
-      text: 'Sign Up'
+      text: 'Cancel'
     }),
   ],
 
@@ -390,13 +395,16 @@ function signup(){
       return console.log('Cancelled');
     }else {
 ref = new Firebase("https://sizzling-torch-3500.firebaseio.com");
-//alert(ref);
+
     ref.authWithOAuthPopup("facebook", function(error, authData) {
   if (error) {
     console.log("Login Failed!", error);
   } else {
-    ref.set({email:data.email,password:data.password});
-    alert(authData.facebook.displayName);
+    data_ref = data;
+    userCreation_normal(data.email,data.password);
+    //ref.set({email:data.email,password:data.password});
+
+    //alert(authData.facebook.displayName);
   }
 });
     //return console.log('Username', data.email, 'Password', data.password);
@@ -440,7 +448,23 @@ function login(){
       return console.log('Cancelled');
     }else {
 ref = new Firebase("https://sizzling-torch-3500.firebaseio.com");
-console.log(ref);
+
+ref.authWithPassword({
+  "email": data.email,
+  "password": data.password
+}, function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+    jQuery('.logged-profile').removeAttr('disabled');
+    jQuery('.logged-profile').text('Welcome');
+    //jQuery('.admin-loggin').addClass('disable_a_href');
+    jQuery('.admin-loggin').text('Sign Out');
+    jQuery('.admin-loggin').click(function(a,b){prompt("Are you sure you want to signout ? ");});
+  }
+});
+//console.log(ref);
     }
 }
     //return console.log('Username', data.email, 'Password', data.password);
@@ -457,6 +481,44 @@ ref.authWithOAuthPopup("facebook", function(error, authData) {
 });*/
 
 } //signup method
+
+function userCreation_normal(email, password){
+                ref.createUser({
+                    email    : email,
+                    password : password
+                    }, function(error, userData) {
+                    if (error) {
+                        console.log(error);
+                        console.log("Trying to login with the same username and password");
+                        //Incase the user already exists it tries to login with the same email and password
+                        if(error.message == "The specified email address is already in use."){
+                            console.log("True");
+                            general_login(email, password);
+                        }
+                        else if(error.message == "The specified email address is invalid."){alert("Please enter a valid email address");signup();}
+                       
+                    } else {
+                        console.log("Successfully created user account with uid:", userData.uid);
+                        var usersRef = ref.child("users");
+                        console.log(usersRef);
+                        console.log($('input[name=dept]:checked').val());
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).set({
+                            //Initial time when the user is registered gets set.
+                            registration_time: Firebase.ServerValue.TIMESTAMP,
+                            user_name: data_ref.email,
+                            reg_year: data_ref.join,
+                            department: data_ref.join
+                        });
+                        console.log(usersRef);
+                        //general_login(email, password);
+                    }
+                });
+            }
+
+
+function admin_signin() {
+
+}
 
     </script>
   </body>
